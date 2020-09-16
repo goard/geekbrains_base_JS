@@ -8,8 +8,34 @@
 <body>
   <script>
     'use strict';
+    console.log(mathOperation(2,3, "вычитание"));
+    function add (a, b) {
+      return a + b;
+    }
+    function sub (a, b) {
+      return a - b;
+    }
+    function div (a, b) {
+      return a / b;
+    }
+    function mul (a, b) {
+      return a * b;
+    }
     function mathOperation(arg1, arg2, operation) {
-
+      switch(operation) {
+        case "сложение":
+          return add(arg1, arg2);
+          break;
+        case "вычитание":
+          return sub(arg1, arg2);
+          break;
+        case "деление":
+          return div(arg1, arg2);
+          break;
+        case "умножение":
+          return mul(arg1, arg2);
+          break;
+      }
     }
   </script>
 </body>
