@@ -8,17 +8,27 @@
 <body>
   <script>
     'use strict';
-    for (let i = 0; i < 11; i++) {
-      if ( i == 0) {
-        console.log(i + " - это ноль")
+    function numToObject (number) {
+      let rank = {
+        units: null,
+        tens: null,
+        hundreds: null
       }
-      if ( i != 0 && (i % 2) == 0) {
-        console.log(i + " - чётное число")
+
+      if(Number.isInteger(number)){
+        if (number >= 0 && number <= 999) {
+          rank.hundreds = Math.floor(number/100)
+          rank.tens = Math.floor(number/10)%10
+          rank.units = Math.floor(number%10)
+          return rank
+        }
+        console.log ("введите одно число от 0 до 999")
+        return {}
       }
-      else if (i != 0) {
-        console.log(i + " - нечётное число")
-      }
+      console.log ("введите одно число от 0 до 999")
+      return {}
     }
+    numToObject(6)
   </script>
 </body>
 </html>

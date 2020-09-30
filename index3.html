@@ -8,41 +8,69 @@
 <body>
   <script>
     'use strict';
-    const products = [
-      {
-        id: 3,
-        price: 127,
-        photos: [
-          "1.jpg",
-          "2.jpg",
-        ]
-      },
-      {
-        id: 5,
-        price: 499,
-        photos: []
-      },
-      {
-        id: 10,
-        price: 26,
-        photos: [
-          "3.jpg"
-        ]
-      },
-      {
-        id: 8,
-        price: 78,
-      },
-    ]
-    let productsPhoto = products.filter(function (product) {
-      if (product.photos == undefined){
-        return
+    //Style ES5
+    //Пункт "а"
+    function Post (author, text, date) {
+      this.author = author;
+      this.text = text;
+      this.date = date;
+    }
+
+    Post.prototype.edit = function (changeText) {
+      this.text = changeText;
+    }
+
+    let post1 = new Post("James Cameron", "hello world", "22.10.1998");
+    console.log(post1);
+    post1.edit("hi world");
+    console.log(post1);
+
+    //Пункт "б"
+    function AttachedPost (author, text, date) {
+      Post.call(this, author, text, date);
+      this.highlighted = false;
+    }
+    AttachedPost.prototype = Object.create(Post.prototype)
+    AttachedPost.prototype.constructor = AttachedPost
+    AttachedPost.prototype.makeTextHighlighted = function () {
+      this.highlighted = true;
+    }
+
+    let post2 = new AttachedPost("Steven Sigal","avatar the one", "22.09.2020")
+    console.log(post2)
+
+    //Style ES6
+    //Пункт "а"
+    class PostEs6 {
+      constructor (author, text, date) {
+        this.author = author;
+        this.text = text;
+        this.date = date;
       }
-      if (product.photos.length > 0) {
-        return product
+
+      edit(changeText) {
+        this.text = changeText;
       }
-    })
-    console.log(productsPhoto)
+    }
+
+    const post3 = new PostEs6('ayur', 'merry cristmas', '12.03.2020');
+    post3.edit('hi ayur');
+    console.log(post3)
+    //Пункт "б"
+    class AttachedPostEs6 extends PostEs6 {
+      constructor(author, text, date) {
+        super(author, text, date);
+        this.highlighted = false;
+      }
+
+      makeTextHighlighted() {
+        this.highlighted = true;
+      }
+    }
+    const post4 = new AttachedPostEs6('dima', 'i love people', '10.10.2019');
+    post4.makeTextHighlighted();
+    post4.edit('hi people planet mars');
+    console.log(post4)
   </script>
 </body>
 </html>
